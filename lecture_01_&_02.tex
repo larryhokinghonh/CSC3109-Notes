@@ -1,0 +1,105 @@
+\documentclass[12pt]{article}
+
+% Language setting
+% Replace `english' with e.g. `spanish' to change the document language
+\usepackage[english]{babel}
+
+% Set page size and margins
+% Replace `letterpaper' with `a4paper' for UK/EU standard size
+\usepackage[a4paper,top=2cm,bottom=2cm,left=2cm,right=2cm,marginparwidth=1.75cm]{geometry}
+
+% Useful packages
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage[colorlinks=true, allcolors=blue]{hyperref}
+
+\linespread{1.25}
+\setlength{\parindent}{0px}
+
+\title{Lecture 01 \& 02}
+\author{Introduction to Machine Learning, Vector and Matrix Representation}
+
+\begin{document}
+\maketitle{}
+
+\section{Supervised \& Unsupervised Learning}
+
+\textbf{Supervised learning} is a type of machine learning algorithm that takes in \textbf{labelled} data, whereby inputs are mapped to the corresponding correct outputs. A model learns the mapping from the inputs to outputs based on the provided data. Examples of supervised learning algorithms are \textbf{linear regression} and \textbf{classification}.
+\vspace{1.5em}
+
+\textbf{Unsupervised learning} is another type of machine learning algorithm that takes in \textbf{unlabelled} data. This algorithm uses the provided dataset to discover hidden patterns. Examples of unsupervised learning algorithms are \textbf{clustering} and \textbf{Principal Component Analysis}.
+
+
+\section{Linear Regression}
+
+\textbf{Linear regression} learns a continuous function from datasets to predict outcomes with continuous values. Optimization in linear regression involves finding the set of weights that results in the algorithm to have the minimum Mean Squared Error (MSE) value.
+\vspace{1.5em}
+
+A linear model refers to a model that follows a linear function, involving input features and their respective weights. The optimum model refers to a linear function that results in a linear regression model to have the minimum MSE value.
+
+\subsection{Mean Squared Error}
+
+\textbf{Loss: } The difference between the predicted and the actual value at a given training point.
+
+\textbf{MSE: } The average loss across all the training points in a dataset.
+\[
+\mathcal{L} = \frac{1}{N} \sum_{n=1}^{N} \left(t_n - f(x_n; w_0, w_1)\right)^2
+\]
+
+\newpage
+\subsection{Vectorizing Models}
+Vectorizing models allow us to simplify the mathematical representation of complex models (e.g. a linear regression model with an 8-order polynomial).
+
+We can encapsulate a complex model like this: 
+\[
+t = w_0 + w_1 x + w_2 x^2 + \cdots + w_K x^K
+\]
+
+Into this:
+\[
+t = \mathbf{w}^\mathrm{T} \mathbf{x}
+\]
+
+By utilizing vectors, where:
+\[
+\mathbf{w} = \begin{bmatrix} w_0 \\ w_1 \\ \vdots \\ w_K \end{bmatrix},
+\quad
+\mathbf{x}_n = \begin{bmatrix} 1 \\ x_n \\ x_n^2 \\ \vdots \\ x_n^K \end{bmatrix}
+\]
+
+\vspace{2.5em}
+Therefore, we can turn the mathematical expression of finding the Mean Squared Error (MSE) from this:
+\[
+\mathcal{L} = \frac{1}{N} \sum_{n=1}^{N} \left(t_n - f(x_n; w_0, w_1)\right)^2
+\]
+
+Into this:
+\[
+\mathcal{L} = \frac{1}{N} (\mathbf{t} - \mathbf{X}\mathbf{w})^\top (\mathbf{t} - \mathbf{X}\mathbf{w})
+\]
+
+\vspace{2.5em}
+When minimizing loss, we need to do partial derivatives with respect to vector \textbf{w} and equal it to zero:
+\[
+\frac{\partial \mathcal{L}}{\partial \mathbf{w}} = \mathbf{0}
+\]
+
+\vspace{1.25em}
+Allowing us to derive the vectorized equation to find the minimum weights, which requires the feature inputs and their corresponding labelled data:
+\[
+\hat{\mathbf{w}} = (\mathbf{X}^\top \mathbf{X})^{-1} \mathbf{X}^\top \mathbf{t}
+\]
+
+\vspace{2.5em}
+A vectorized expression of the weights and feature inputs of an 8-order polynomial model:
+\[
+t = w_0 + w_1 x + w_2 x^2 + \cdots + w_8 x^8
+\]
+\[
+\mathbf{w} = \begin{bmatrix} w_0 \\ w_1 \\ \vdots \\ w_8\end{bmatrix}
+,\quad
+\mathbf{X} = \begin{bmatrix} 1 & x_1 & x_1^2 & \cdots & x_1^8 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 1 & x_N & x_N^2 & \cdots & x_N^8 \end{bmatrix}
+\]
+
+
+\end{document}
